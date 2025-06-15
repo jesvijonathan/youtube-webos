@@ -48,6 +48,13 @@ const configOptions = new Map([
       default: false,
       desc: 'Hide YouTube logo'
     }
+  ],
+  [
+    'forceHighResVideo',
+    {
+      default: false,
+      desc: 'Force max resolution video playback'
+    }
   ]
 ]);
 
