@@ -1,5 +1,40 @@
 import { waitForChildAdd } from './utils';
 
+export interface CaptionTrack {
+  languageCode: string;
+  languageName: string;
+  displayName?: string;
+  kind: string;
+}
+
+interface CaptionGetOptionArgs {
+  stickyLoading: boolean;
+  track: undefined;
+  tracklist: {
+    includeAsr: boolean;
+  };
+  translationLanguages: unknown;
+  recommendedTranslationLanguages: undefined;
+  defaultTranslationSourceTrackIndices: unknown;
+}
+
+interface CaptionGetOptionValue {
+  reload: boolean;
+  stickyLoading: boolean;
+  track: CaptionTrack;
+  tracklist: CaptionTrack[] | undefined;
+  translationLanguages: CaptionTrack[];
+  recommendedTranslationLanguages: unknown;
+  defaultTranslationSourceTrackIndices: unknown;
+}
+
+interface EmptyObject {}
+
+interface CaptionSetOptionArgs {
+  reload: true;
+  track: CaptionTrack | EmptyObject;
+}
+
 export enum PlayerState {
   UNSTARTED = -1,
   ENDED = 0,
@@ -21,6 +56,10 @@ interface VideoQualityData {
   paygatedQualityDetails?: unknown;
 }
 
+export interface VideoData {
+  video_id: string;
+}
+
 export interface YTPlayer extends HTMLElement {
   addEventListener<K extends keyof YTPlayerEventMap>(
     type: K,
@@ -34,6 +73,24 @@ export interface YTPlayer extends HTMLElement {
   getAvailableQualityData(): VideoQualityData[];
 
   setPlaybackQualityRange(min: string, max: string, formatId?: string): void;
+
+  getVideoData(): VideoData;
+
+  loadModule(moduleName: string): void;
+
+  getOption<T extends keyof CaptionGetOptionArgs>(
+    module: 'captions',
+    name: T,
+    options?: CaptionGetOptionArgs[T]
+  ): CaptionGetOptionValue[T];
+
+  setOption<T extends keyof CaptionSetOptionArgs>(
+    module: 'captions',
+    name: T,
+    value: CaptionSetOptionArgs[T]
+  ): void;
+
+  toggleSubtitlesOn(): void;
 }
 
 /**

@@ -55,6 +55,13 @@ const configOptions = new Map([
       default: false,
       desc: 'Force max resolution video playback'
     }
+  ],
+  [
+    'stickySubtitles',
+    {
+      default: true,
+      desc: 'Auto-swap between different subtitle types of the same language'
+    }
   ]
 ]);
 
