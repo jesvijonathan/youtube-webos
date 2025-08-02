@@ -132,6 +132,7 @@ function createOptionsPanel() {
   elmContainer.appendChild(createConfigCheckbox('removeShorts'));
   elmContainer.appendChild(createConfigCheckbox('forceHighResVideo'));
   elmContainer.appendChild(createConfigCheckbox('enableSponsorBlock'));
+  elmContainer.appendChild(createConfigCheckbox('enableScrollSeek'));
 
   const elmBlock = document.createElement('blockquote');
 
