@@ -69,6 +69,13 @@ const configOptions = new Map([
       default: true,
       desc: 'Enable video seeking with scroll-wheel'
     }
+  ],
+  [
+    'reduceAnimations',
+    {
+      default: false,
+      desc: 'Reduce animations'
+    }
   ]
 ]);
 
