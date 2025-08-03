@@ -1,4 +1,5 @@
 /*global navigate*/
+/* global __YTAF_VERSION__ */
 import './spatial-navigation-polyfill.js';
 import {
   configAddChangeListener,
@@ -8,6 +9,8 @@ import {
 } from './config.js';
 import './ui.css';
 import { requireElement } from './player_api/helpers';
+
+const ytaf_version = __YTAF_VERSION__;
 
 // We handle key events ourselves.
 window.__spatialNavigation__.keyMode = 'NONE';
@@ -122,7 +125,10 @@ function createOptionsPanel() {
   );
 
   const elmHeading = document.createElement('h1');
-  elmHeading.textContent = 'WebOS YouTube Extended';
+  elmHeading.innerHTML =
+    'WebOS YouTube Extended <div class="ytaf-ui-version">v' +
+    ytaf_version +
+    '</div>';
   elmContainer.appendChild(elmHeading);
 
   elmContainer.appendChild(createConfigCheckbox('enableAdBlock'));
