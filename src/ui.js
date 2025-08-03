@@ -191,7 +191,7 @@ const eventHandler = (evt) => {
   );
 
   if (getKeyColor(evt.charCode) === 'green') {
-    console.info('Taking over : Options panel');
+    console.info('Taking over!');
 
     evt.preventDefault();
     evt.stopPropagation();
@@ -204,8 +204,6 @@ const eventHandler = (evt) => {
   }
 
   if (getKeyColor(evt.charCode) === 'blue') {
-    console.info('Taking over : Audio Only mode');
-
     evt.preventDefault();
     evt.stopPropagation();
 
@@ -298,16 +296,11 @@ function applyUIFixes() {
 }
 
 async function initAudioOnlyToggle() {
-  try {
-    const elVideo = await requireElement('video', HTMLVideoElement);
-    const elVideoVisi = elVideo.style.visibility === 'hidden';
-    elVideo.style.visibility = elVideoVisi ? '' : 'hidden';
-    const s = elVideoVisi ? 'Disabled' : 'Enabled';
-    console.log('Audio-only mode:', s);
-    showNotification('Audio-only mode: ' + s, 2000);
-  } catch {
-    console.warn('Failed to toggle audio-only mode');
-  }
+  const elVideo = await requireElement('video', HTMLVideoElement);
+  const elVideoVisi = elVideo.style.visibility === 'hidden';
+  elVideo.style.visibility = elVideoVisi ? '' : 'hidden';
+  const s = elVideoVisi ? 'Disabled' : 'Enabled';
+  showNotification('Audio-only mode: ' + s, 2000);
 }
 
 applyUIFixes();
