@@ -124,10 +124,7 @@ function createOptionsPanel() {
   );
 
   const elmHeading = document.createElement('h1');
-  elmHeading.innerHTML =
-    'WebOS YouTube Extended <div class="ytaf-ui-version">v' +
-    ytaf_version +
-    '</div>';
+  elmHeading.innerHTML = 'WebOS YouTube Extended';
   elmContainer.appendChild(elmHeading);
 
   elmContainer.appendChild(createConfigCheckbox('enableAdBlock'));
@@ -155,6 +152,10 @@ function createOptionsPanel() {
   elmSponsorLink.innerHTML =
     '<small class="ytaf-ui-sponsor">Sponsor segments skipping - https://sponsor.ajay.app</small>';
   elmContainer.appendChild(elmSponsorLink);
+
+  const elmVersion = document.createElement('div');
+  elmVersion.innerHTML = `<div class="ytaf-ui-version">v${ytaf_version}</div>`;
+  elmContainer.appendChild(elmVersion);
 
   return elmContainer;
 }
