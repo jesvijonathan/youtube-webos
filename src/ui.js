@@ -7,15 +7,12 @@ import {
   configGetDesc
 } from './config.js';
 import './ui.css';
+import { requireElement } from './player_api/helpers';
 
 // We handle key events ourselves.
 window.__spatialNavigation__.keyMode = 'NONE';
 
 const ARROW_KEY_CODE = { 37: 'left', 38: 'up', 39: 'right', 40: 'down' };
-
-// Red, Green, Yellow, Blue
-// 403,   404,    405,  406
-// ---,   172,    170,  191
 const colorCodeMap = new Map([
   [403, 'red'],
 
@@ -26,6 +23,7 @@ const colorCodeMap = new Map([
   [170, 'yellow'],
 
   [406, 'blue'],
+  [167, 'blue'],
   [191, 'blue']
 ]);
 
@@ -199,6 +197,17 @@ const eventHandler = (evt) => {
     }
     return false;
   }
+
+  if (getKeyColor(evt.charCode) === 'blue') {
+    evt.preventDefault();
+    evt.stopPropagation();
+
+    if (evt.type === 'keydown') {
+      // Toggle Audio-Only mode.
+      initAudioOnlyToggle();
+    }
+    return false;
+  }
   return true;
 };
 
@@ -280,6 +289,14 @@ function applyUIFixes() {
   } catch (e) {
     console.error('error setting up <body> class observer:', e);
   }
+}
+
+async function initAudioOnlyToggle() {
+  const elVideo = await requireElement('video', HTMLVideoElement);
+  const elVideoVisi = elVideo.style.visibility === 'hidden';
+  elVideo.style.visibility = elVideoVisi ? '' : 'hidden';
+  const s = elVideoVisi ? 'Disabled' : 'Enabled';
+  showNotification('Audio-only mode: ' + s, 'blue', 2000);
 }
 
 applyUIFixes();
